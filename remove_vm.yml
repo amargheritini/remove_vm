@@ -16,7 +16,7 @@
       register: test_vm
 
     -name: power off VM
-     vmware.vmware_rest.vcenter_vm:
+     vmware.vmware_rest.vcenter_vm_power:
        vm: '{{ test_vm.id }}'
        state: stop
 
