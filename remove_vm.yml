@@ -15,10 +15,10 @@
         vm: '{{ search_result.value[0].vm }}'
       register: test_vm
 
-    -name: power off VM
-     vmware.vmware_rest.vcenter_vm_power:
-       vm: '{{ test_vm.id }}'
-       state: poweroff
+    - name: power off VM
+      vmware.vmware_rest.vcenter_vm_power:
+        vm: '{{ test_vm.id }}'
+        state: poweroff
 
     - name: remove a VM named test-vm from vcenter with vmware_rest
       vmware.vmware_rest.vcenter_vm:
