@@ -17,8 +17,8 @@
 
     -name: power off VM
      vmware.vmware_rest.vcenter_vm:
-        vm: '{{ test_vm.id }}'
-        state: stop
+       vm: '{{ test_vm.id }}'
+       state: stop
 
     - name: remove a VM named test-vm from vcenter with vmware_rest
       vmware.vmware_rest.vcenter_vm:
