@@ -4,7 +4,18 @@
   connection: local
   gather_facts: no
   tasks: 
+    - name: Look up the VM called {{ vm_name }} in the inventory
+      register: search_result
+      vmware.vmware_rest.vcenter_vm_info:
+        filter_names:
+          - '{{ vm_name }}'
+      
+    - name: Collect information about a specific VM
+      vmware.vmware_rest.vcenter_vm_info:
+        vm: '{{ search_result.value[0].vm }}'
+      register: test_vm
+      
     - name: remove a VM named test-vm from vcenter with vmware_rest
       vmware.vmware_rest.vcenter_vm:
-        name: test-vm
+        vm: '{{ test_vm.id }}'
         state: absent
