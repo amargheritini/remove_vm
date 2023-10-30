@@ -1,0 +1,10 @@
+---
+- name: Remove VM
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks: 
+    - name: remove a VM named test-vm from vcenter with vmware_rest
+      vmware.vmware_rest.vcenter_vm:
+        name: test-vm
+        state: absent
