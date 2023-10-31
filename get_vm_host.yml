@@ -22,6 +22,6 @@
 
     - name: Gather one specific VM
       community.vmware.vmware_vm_info:
-        vm_name: 'Winsozz_test'
+        vm_name: Winsozz_test
       delegate_to: localhost
       register: vm_info
