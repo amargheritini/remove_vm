@@ -21,6 +21,9 @@
       when: item.guest_name == "Winsozz_test"
       delegate_to: localhost
 
+    - name: print
+      debug:
+        var: vm_esxi_host_result
 
 
           
