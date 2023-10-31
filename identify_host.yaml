@@ -12,11 +12,10 @@
       register: vm_info
 
     - name: Check VM name in the result variable
+      debug:
+        msg: "{{ item.esxi_hostname }}"
       with_items: "{{ vm_info.virtual_machines }}"
       when: item.guest_name == "Winsozz_test"
-      register: vm_info_guest
 
 
-    - name: Display ESXi host information
-      debug:
-        msg: "{{ vm_info_guest.esxi_hostname }}"
+  
