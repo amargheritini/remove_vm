@@ -28,12 +28,12 @@
       when: vm_esxi_host_result == "vegaesx02.vega.local"
 
 
-   - name: perform vmware vmotion for vm named Winsozz_test on vcenter address 10.200.15.30
-     community.vmware.vmware_vmotion:
-       vm_name: "Winsozz_test"
-       destination_host: "vegaesx02.vega.local"
-     delegate_to: localhost
-     when: vm_esxi_host_result == "vegaesx01.vega.local"
+    - name: perform vmware vmotion for vm named Winsozz_test on vcenter address 10.200.15.30
+      community.vmware.vmware_vmotion:
+        vm_name: "Winsozz_test"
+        destination_host: "vegaesx02.vega.local"
+      delegate_to: localhost
+      when: vm_esxi_host_result == "vegaesx01.vega.local"
         
         
 
