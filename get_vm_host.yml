@@ -20,8 +20,4 @@
         vm: '{{ Winsozz_test_info.id }}'
       register: _result
 
-    - name: Gather one specific VM
-      community.vmware.vmware_vm_info:
-        vm_name: Winsozz_test
-      delegate_to: localhost
-      register: vm_info
+  
