@@ -19,3 +19,9 @@
       vmware.vmware_rest.vcenter_vm_guest_identity_info:
         vm: '{{ Winsozz_test_info.id }}'
       register: _result
+
+    - name: Gather one specific VM
+      community.vmware.vmware_vm_info:
+        vm_name: 'vm_name_as_per_vcenter'
+      delegate_to: localhost
+      register: vm_info
