@@ -1,7 +1,7 @@
 ---
 - name: VM running host
-  hosts: localhost
-  connection: local
+  hosts: all
+  connection: httpapi
   gather_facts: no
   tasks:
     - name: Gather information about the VM
@@ -17,23 +17,27 @@
       register: vm_esxi_host_result
       with_items: "{{ vm_info.virtual_machines }}"
       when: item.guest_name == "Winsozz_test"
+      delegate_to: localhost
+
 
 
           
-    - name: perform vmware vmotion for vm named Winsozz_test on vcenter address 10.200.15.30
+    - name: perform vmware vmotion for vm named Winsozz_test on esx01
       community.vmware.vmware_vmotion:
         vm_name: "Winsozz_test"
         destination_host: "vegaesx01.vega.local"
-      delegate_to: localhost
       when: vm_esxi_host_result == "vegaesx02.vega.local"
+      delegate_to: localhost
 
 
-    - name: perform vmware vmotion for vm named Winsozz_test on vcenter address 10.200.15.30
+
+    - name: perform vmware vmotion for vm named Winsozz_test on esx02
       community.vmware.vmware_vmotion:
         vm_name: "Winsozz_test"
         destination_host: "vegaesx02.vega.local"
-      delegate_to: localhost
       when: vm_esxi_host_result == "vegaesx01.vega.local"
+      delegate_to: localhost
+
         
         
 
