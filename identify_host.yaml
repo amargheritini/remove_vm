@@ -14,24 +14,17 @@
 
 
     - name: Check VM name in the result variable
-      debug:
-        msg: "{{ item.esxi_hostname }}"
-      register: vm_esxi_host_result
+      set_fact:
+        vm_esxi_host_result: "{{ item.esxi_hostname }}"
       with_items: "{{ vm_info.virtual_machines }}"
       when: item.guest_name == "Winsozz_test"
       delegate_to: localhost
 
-    - name: print
-      debug:
-        var: vm_esxi_host_result
-
-
-          
     - name: perform vmware vmotion for vm named Winsozz_test on esx01
       community.vmware.vmware_vmotion:
         vm_name: "Winsozz_test"
         destination_host: "vegaesx01.vega.local"
-      when: vm_esxi_host_result.esxi_hostname == "vegaesx02.vega.local"
+      when: vm_esxi_host_result == "vegaesx02.vega.local"
       delegate_to: localhost
 
 
@@ -40,12 +33,5 @@
       community.vmware.vmware_vmotion:
         vm_name: "Winsozz_test"
         destination_host: "vegaesx02.vega.local"
-      when: vm_esxi_host_result.esxi_hostname == "vegaesx01.vega.local"
-      delegate_to: localhost
-
-        
-        
-
-
-
-  
+      when: vm_esxi_host_result == "vegaesx01.vega.local"
+      delegate_to: localhost  
