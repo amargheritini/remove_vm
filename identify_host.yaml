@@ -28,7 +28,7 @@
       community.vmware.vmware_vmotion:
         vm_name: "Winsozz_test"
         destination_host: "vegaesx01.vega.local"
-      when: vm_esxi_host_result == "vegaesx02.vega.local"
+      when: vm_esxi_host_result.esxi_hostname == "vegaesx02.vega.local"
       delegate_to: localhost
 
 
@@ -37,7 +37,7 @@
       community.vmware.vmware_vmotion:
         vm_name: "Winsozz_test"
         destination_host: "vegaesx02.vega.local"
-      when: vm_esxi_host_result == "vegaesx01.vega.local"
+      when: vm_esxi_host_result.esxi_hostname == "vegaesx01.vega.local"
       delegate_to: localhost
 
         
