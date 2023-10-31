@@ -10,16 +10,13 @@
 
       # Filter the VM information to find Winsozz_test
       register: vm_info
-      delegate_to: localhost
-      with_items: "{{ vm_info.virtual_machines }}"
-      when: item.name == "Winsozz_test"
 
-    - name: Extract ESXi host information
-      set_fact:
-        esxi_host: "{{ vm_info.results[0].item.runtime.host }}"
-      when: vm_info.results | length > 0
+    - name: Check VM name in the result variable
+      with_items: "{{ vm_info.virtual_machines }}"
+      when: item.guest_name == "Winsozz_test"
+      register: vm_info_guest
+
 
     - name: Display ESXi host information
       debug:
-        var: esxi_host
-      when: vm_info.results | length > 0
+        msg: "{{ vm_info_guest.esxi_hostname }}"
