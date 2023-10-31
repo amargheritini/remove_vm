@@ -1,0 +1,24 @@
+---
+- name: Identify ESXi host for VM
+  hosts: localhost  # You can run this playbook from any host with Ansible installed
+  gather_facts: no
+  tasks:
+    - name: Gather information about the VM
+      community.vmware.vmware_vm_info:
+        validate_certs: no  # Set to 'yes' if you want to validate SSL certificates
+
+      # Filter the VM information to find the specific VM (vm_test)
+      register: vm_info
+      delegate_to: localhost
+      with_items: "{{ vm_info.virtual_machines }}"
+      when: item.name == "Winsozz_test"
+
+    - name: Extract ESXi host information
+      set_fact:
+        esxi_host: "{{ vm_info.results[0].item.runtime.host }}"
+      when: vm_info.results | length > 0
+
+    - name: Display ESXi host information
+      debug:
+        var: esxi_host
+      when: vm_info.results | length > 0
