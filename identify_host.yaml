@@ -1,37 +1,24 @@
 ---
 - name: VM running host
-  hosts: all
-  connection: httpapi
+  hosts: localhost
+  connection: local
   gather_facts: no
   tasks:
     - name: Gather information about the VM
       community.vmware.vmware_vm_info:
         validate_certs: no  # Set to 'yes' if you want to validate SSL certificates
-
-      # Filter the VM information to find Winsozz_test
+        vm_name: "Winsozz_test"
+        folder: "/VEGA/vm/CRIF-PoC"
       register: vm_info
-      delegate_to: localhost
-
-
-    - name: Check VM name in the result variable
-      set_fact:
-        vm_esxi_host_result: "{{ item.esxi_hostname }}"
-      with_items: "{{ vm_info.virtual_machines }}"
-      when: item.guest_name == "Winsozz_test"
-      delegate_to: localhost
 
     - name: perform vmware vmotion for vm named Winsozz_test on esx01
       community.vmware.vmware_vmotion:
         vm_name: "Winsozz_test"
         destination_host: "vegaesx01.vega.local"
-      when: vm_esxi_host_result == "vegaesx02.vega.local"
-      delegate_to: localhost
-
-
+      when: vm_info.virtual_machines[0].esxi_hostname == "vegaesx02.vega.local"
 
     - name: perform vmware vmotion for vm named Winsozz_test on esx02
       community.vmware.vmware_vmotion:
         vm_name: "Winsozz_test"
         destination_host: "vegaesx02.vega.local"
-      when: vm_esxi_host_result == "vegaesx01.vega.local"
-      delegate_to: localhost  
+      when: vm_info.virtual_machines[0].esxi_hostname == "vegaesx01.vega.local"
