@@ -7,18 +7,18 @@
     - name: Gather information about the VM
       community.vmware.vmware_vm_info:
         validate_certs: no  # Set to 'yes' if you want to validate SSL certificates
-        vm_name: "Winsozz_test"
+        vm_name: '{{ vm_name }}'
         folder: "/VEGA/vm/CRIF-PoC"
       register: vm_info
 
     - name: perform vmware vmotion for vm named Winsozz_test on esx01
       community.vmware.vmware_vmotion:
-        vm_name: "Winsozz_test"
+        vm_name: '{{ vm_name }}'
         destination_host: "vegaesx01.vega.local"
       when: vm_info.virtual_machines[0].esxi_hostname == "vegaesx02.vega.local"
 
     - name: perform vmware vmotion for vm named Winsozz_test on esx02
       community.vmware.vmware_vmotion:
-        vm_name: "Winsozz_test"
+        vm_name: '{{ vm_name }}'
         destination_host: "vegaesx02.vega.local"
       when: vm_info.virtual_machines[0].esxi_hostname == "vegaesx01.vega.local"
