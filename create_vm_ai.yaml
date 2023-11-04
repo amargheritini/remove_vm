@@ -42,4 +42,11 @@
         destination_host: vegaesx01.vega.local
       delegate_to: localhost
 
+    - name: Gather information about hw_esxi_host
+      community.vmware.vmware_guest_info:
+        name: vm-centos-ansible
+      delegate_to: localhost
+      register: hw_esxi_host_info
+      loop: "{{ vmfacts.instance.hw_esxi_hosts |dict2items }}"
+
 
