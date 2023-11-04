@@ -6,6 +6,7 @@
   tasks: 
     - name: deploy a vm with name is vm-win-ansible, datastore is vega01 and template WIN2019 and in folder Crif-PoC, networks is dhcp
       community.vmware.vmware_guest:
+        datacenter: VEGA
         folder: /Crif-PoC
 
         name: vm-win-ansible
@@ -26,6 +27,7 @@
       delegate_to: localhost
     - name: customize cpu, memory and disk
       community.vmware.vmware_guest:
+        datacenter: VEGA
         folder: /Crif-PoC
         name: vm-win-ansible
   
@@ -42,6 +44,7 @@
     
     - name: turn on the vm
       community.vmware.vmware_guest:
+        datacenter: VEGA
         folder: /Crif-PoC
         name: vm-win-ansible
         state: powerup
