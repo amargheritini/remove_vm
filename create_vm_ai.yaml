@@ -35,4 +35,11 @@
         wait_for_ip_address: true
       delegate_to: localhost
 
+    - name: perform a vmotion if the vm is in host numeber 1
+      community.vmware.vmware_vmotion:
+ 
+        vm_name: vm-centos-ansible
+        destination_host: vegaesx01.vega.local
+      delegate_to: localhost
+
 
