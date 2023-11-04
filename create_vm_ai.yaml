@@ -12,7 +12,7 @@
         folder: /CRIF-PoC
         datastore: vega01
         state: poweredon
-        template: WIN2019
+        template: CentOS7
         customization:
           existing_vm: false
           dns_servers:
