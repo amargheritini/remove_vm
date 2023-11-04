@@ -27,7 +27,7 @@
         wait_for_ip_address: true
       delegate_to: localhost
     - name: customize cpu, memory and disk
-      community.vmware.vmware_guest
+      community.vmware.vmware_guest:
         name: vm-win-ansible
 
         datacenter: VEGA
