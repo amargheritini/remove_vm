@@ -1,4 +1,4 @@
-A---
+---
 - name: Create a VM on the vcenter VEGA 
   hosts: localhost
   connection: local
