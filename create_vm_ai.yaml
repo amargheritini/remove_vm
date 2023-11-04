@@ -26,27 +26,5 @@
             start_connected: true
         wait_for_ip_address: true
       delegate_to: localhost
-    - name: customize cpu, memory and disk
-      community.vmware.vmware_guest:
-        name: vm-win-ansible
 
-
-  
-        disk:
-          - size_gb: 120
-            type: thin
-
-        hardware:
-          memory_mb: 1024
-          num_cpus: 2
-          scsi: paravirtual
-      delegate_to: localhost
-    
-    - name: turn on the vm
-      community.vmware.vmware_guest:
-        name: vm-win-ansible
-
-        state: powerup
-      delegate_to: localhost
-    
 
