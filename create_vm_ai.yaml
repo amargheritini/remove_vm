@@ -9,7 +9,7 @@
         name: vm-win-ansible
 
         datacenter: VEGA
-        folder: /VEGA/CRIF-PoC
+        folder: /CRIF-PoC
         datastore: vega01
         state: poweredon
         template: WIN2019
