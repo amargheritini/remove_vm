@@ -20,6 +20,14 @@
             - 8.8.8.8
           dns_suffix:
             - hx-devops.com.ch
+        disk:
+            - size_gb: 120
+              type: thin
+
+        hardware:
+          memory_mb: 1024
+          num_cpus: 2
+          scsi: paravirtual
         networks:
           - name: vegavm15
             connected: true
