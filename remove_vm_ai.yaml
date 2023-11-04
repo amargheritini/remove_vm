@@ -1,0 +1,21 @@
+---
+- name: Power OFF and remove a VM named vm-win-ansible within DC named VEGA and in a folder named Crif with vmware_rest collections
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks: 
+    - name: power off the vm-win-ansible in folder
+      community.vmware.vmware_guest_powerstate:
+        name: '{{ vm_name }}'
+        state: powered-off
+      delegate_to: localhost
+      register: deploy
+    
+
+    - name: delete the vm named vm-win-ansible
+      community.vmware.vmware_guest:
+        name: '{{ vm_name }}'
+        state: absent
+      delegate_to: localhost
+      register: delete
+    
