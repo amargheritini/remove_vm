@@ -1,0 +1,27 @@
+---
+- name: Create a VM on the vcenter VEGA 
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks: 
+    - name: create a VM on vcenter in folder /CRIF-PoC using a template CentOS7
+      community.vmware.vmware_guest:
+
+        folder: /CRIF-PoC
+        datacenter: VEGA
+        name: vega-test-01
+        state: poweredon
+        template: CentOS7
+        disk:
+          - size_gb: 120
+            type: thin
+            datastore: vega01
+        hardware:
+          memory_mb: 2048
+          num_cpus: 2
+          scsi: paravirtual
+        networks:
+          - name: vegavm15
+            device_type: vmxnet3
+      register: deploy_vm
+    
