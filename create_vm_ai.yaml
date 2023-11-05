@@ -4,7 +4,7 @@
   connection: local
   gather_facts: no
   tasks: 
-    - name: deploy a vm with name is vm-win-ansible, datastore is vega01 and template WIN2019 and in folder Crif-PoC, networks is dhcp
+    - name: deploy a vm with name is vm-centos-ansible, datastore is vega01 and template CentOS7 and in folder Crif-PoC, networks is dhcp
       community.vmware.vmware_guest:
         name: vm-centos-ansible
 
@@ -19,7 +19,7 @@
             - 1.1.1.1
             - 8.8.8.8
           dns_suffix:
-            - hx-devops.com.ch
+            - vega.local
         disk:
             - size_gb: 120
               type: thin
@@ -41,12 +41,5 @@
         vm_name: vm-centos-ansible
         destination_host: vegaesx01.vega.local
       delegate_to: localhost
-
-    - name: Gather information about hw_esxi_host
-      community.vmware.vmware_guest_info:
-        name: vm-centos-ansible
-      delegate_to: localhost
-      register: hw_esxi_host_info
-      loop: "{{ vmfacts.instance.hw_esxi_hosts |dict2items }}"
 
 
