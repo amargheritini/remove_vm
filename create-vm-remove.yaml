@@ -27,4 +27,4 @@
           - name: vegavm15
             device_type: vmxnet3
       register: deploy_vm
-    
+      delegate_to: localhost
