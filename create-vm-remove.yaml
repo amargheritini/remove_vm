@@ -6,12 +6,15 @@
   tasks: 
     - name: create a VM on vcenter in folder /CRIF-PoC using a template CentOS7
       community.vmware.vmware_guest:
-
-        folder: /CRIF-PoC
-        datacenter: VEGA
         name: vega-test-01
+
+        datacenter: VEGA
+        folder: /CRIF-PoC
+        datastore: vega01
         state: poweredon
         template: CentOS7
+
+
         disk:
           - size_gb: 120
             type: thin
